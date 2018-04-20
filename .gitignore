@@ -1,0 +1,8 @@
+*.xml
+*.iml
+
+*.xml___jb_tmp___
+.idea/libraries/mayflower3_1_2.xml
+.idea/libraries/mayflower3_1_2.xml
+*.class
+.out/
