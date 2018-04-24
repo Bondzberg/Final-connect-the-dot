@@ -5,7 +5,8 @@ import mayflower.ui.Button;
 
 public class Runner extends Mayflower
 {
-    public Runner(){
+    public Runner()
+    {
         super("Project ultra secret", 800, 800);
     }
     public static void main(String[] args){
