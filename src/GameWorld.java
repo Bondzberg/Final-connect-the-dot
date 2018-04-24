@@ -5,24 +5,24 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public abstract class GameWorld extends World implements EventListener
+public class GameWorld extends World implements EventListener
 {
-    private int[][] squares;
+    private square[][] squares;
     private Dot[][] Dots;
-    private HashMap<Dot,List<Integer>> dts;
+    private HashMap<Dot,List<square>> dts;
     public GameWorld(int x,int y)
     {
         Dots = new Dot[x][y];
-        squares = new int[x-1][y-1];
+        squares = new square[x-1][y-1];
         dts = new HashMap();
         for(int c=0;c<y;c++)
         {
             for(int r = 0;r<x;r++)
             {
-                Dots[c][r]=new Dot("placeholder",x+" "+y);
+                Dots[c][r]=new Dot("imgs/Dot.png",c+" "+r);
                 Dots[c][r].addEventListener(this);
-                addObject(Dots[c][r],c*10,r*10);
-
+                addObject(Dots[c][r],c*50,r*50);
+                dts.put(Dots[c][r],new ArrayList<>());
             }
         }
 
@@ -30,8 +30,9 @@ public abstract class GameWorld extends World implements EventListener
         {
             for(int r = 0;r<squares[0].length;r++)
             {
-
-                squares[c][r] = 0;
+                squares[c][r] = new square();
+                squares[c][r].setImage("imgs/empty.png");
+                addObject(squares[c][r],c*50,r*50);
                 dts.get(Dots[c][r]).add(squares[c][r]);
                 dts.get(Dots[c+1][r]).add(squares[c][r]);
                 dts.get(Dots[c][r+1]).add(squares[c][r]);
@@ -48,10 +49,10 @@ public abstract class GameWorld extends World implements EventListener
         String[] cord = s.split(" ");
         int x = Integer.valueOf(cord[0]);
         int y = Integer.valueOf(cord[1]);
-        List<Integer> i = dts.get(Dots[x][y]);
-        for(int l:i)
+        List<square> i = dts.get(Dots[x][y]);
+        for(square l:i)
         {
-            l++;
+            l.incrementVlaue();
         }
     }
 

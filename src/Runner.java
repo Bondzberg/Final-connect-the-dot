@@ -14,7 +14,7 @@ public class Runner extends Mayflower
     }
     public void init()
     {
-        Mayflower.setWorld(new MenuWorld());
+        Mayflower.setWorld(new GameWorld(5,5));
     }
     public void main()
     {
