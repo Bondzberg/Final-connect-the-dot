@@ -7,20 +7,14 @@ public class Runner extends Mayflower
 {
     public Runner()
     {
-        super("Project ultra secret", 800, 800);
+        super("Project ultra secret", 800, 600);
     }
     public static void main(String[] args){
         new Runner();
     }
     public void init()
     {
-
-        Mayflower.setWorld(new World() {
-            @Override
-            public void act() {
-                System.out.println(System.currentTimeMillis());
-            }
-        });
+        Mayflower.setWorld(new MenuWorld());
     }
     public void main()
     {
