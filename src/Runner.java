@@ -1,5 +1,7 @@
 import mayflower.Mayflower;
 import mayflower.World;
+import mayflower.event.EventListener;
+import mayflower.ui.Button;
 
 public class Runner extends Mayflower
 {
@@ -11,6 +13,7 @@ public class Runner extends Mayflower
     }
     public void init()
     {
+
         Mayflower.setWorld(new World() {
             @Override
             public void act() {
@@ -20,6 +23,6 @@ public class Runner extends Mayflower
     }
     public void main()
     {
-        System.out.println();
+
     }
 }
