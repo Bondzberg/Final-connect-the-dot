@@ -8,23 +8,38 @@ import java.util.List;
 public class GameWorld extends World implements EventListener
 {
     private square[][] squares;
-    private Dot[][] Dots;
-    private HashMap<Dot,List<square>> dts;
+    private Line[][] Lines;
+    private HashMap<Line,List<square>> dts;
+    private Line selected;
+
     public GameWorld(int x,int y)
     {
-        Dots = new Dot[x][y];
+        Lines = new Line[x*2-1][y];
         squares = new square[x-1][y-1];
         dts = new HashMap();
-        for(int c=0;c<y;c++)
+        selected = null;
+
+        for(int c=0;c<2*y-1;c++)
         {
-            for(int r = 0;r<x;r++)
+            int z = x-1;
+            if(c%2==1)
             {
-                Dots[c][r]=new Dot("imgs/Dot.png",c+" "+r);
-                Dots[c][r].addEventListener(this);
-                addObject(Dots[c][r],c*50,r*50);
-                dts.put(Dots[c][r],new ArrayList<>());
+                z++;
+            }
+            for(int r = 0;r<z;r++)
+            {
+                Lines[c][r] = new Line("imgs/line.png",c+" "+r);
+                Lines[c][r].addEventListener(this);
+                addObject(Lines[c][r],c*50+50,r*50+50);
+                dts.put(Lines[c][r],new ArrayList<>());
+                Lines[c][r].addEventListener(this);
+                if(c%2==1) {
+                    Lines[c][r].setRotation(90);
+                    Lines[c][r].move(50);
+                }
             }
         }
+
 
         for(int c=0;c<squares.length;c++)
         {
@@ -33,10 +48,11 @@ public class GameWorld extends World implements EventListener
                 squares[c][r] = new square();
                 squares[c][r].setImage("imgs/empty.png");
                 addObject(squares[c][r],c*50,r*50);
-                dts.get(Dots[c][r]).add(squares[c][r]);
-                dts.get(Dots[c+1][r]).add(squares[c][r]);
-                dts.get(Dots[c][r+1]).add(squares[c][r]);
-                dts.get(Dots[c+1][r+1]).add(squares[c][r]);
+                //dts.get(Lines[c][r]).add(squares[c][r]);
+               // dts.get(Lines[c+1][r]).add(squares[c][r]);
+                //dts.get(Lines[c][r+1]).add(squares[c][r]);
+                //dts.get(Lines[c+1][r+1]).add(squares[c][r]);
+
 
             }
         }
@@ -46,18 +62,43 @@ public class GameWorld extends World implements EventListener
     @Override
     public void onEvent(String s)
     {
+
         String[] cord = s.split(" ");
         int x = Integer.valueOf(cord[0]);
         int y = Integer.valueOf(cord[1]);
-        List<square> i = dts.get(Dots[x][y]);
-        for(square l:i)
+        if(selected != null)
         {
-            l.incrementVlaue();
+            special(selected, Lines[x][y]);
         }
+        else
+            selected = Lines[x][y];
+
     }
 
     @Override
-    public void act() {
+    public void act()
+    {
+
+
+    }
+
+    public void special(Line dot1,Line dot2)
+    {
+        List<square> i = dts.get(dot1);
+        List<square> t = dts.get(dot2);
+        i.retainAll(t);
+        while(i.size()>1)
+        {
+            square square = i.get(0);
+            square.incrementVlaue();
+            dts.get(dot1).remove(square);
+            dts.get(dot2).remove(square);
+            i.remove(0);
+        }
+
+        if(i.size()==0)
+            selected =null;
+
 
     }
 }
