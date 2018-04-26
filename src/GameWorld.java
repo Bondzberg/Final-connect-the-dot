@@ -60,4 +60,18 @@ public class GameWorld extends World implements EventListener
     public void act() {
 
     }
+
+
+    /*
+    Jonathan's 4-26 code:
+    if(isGameOver())
+    {
+        if(game.getWinner().equals(me))
+        {
+            graphics.setBackground("img/win.jpg");
+        }
+        else
+            graphics.setBackground("img/lose.jpg");
+    }
+     */
 }
