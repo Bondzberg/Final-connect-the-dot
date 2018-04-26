@@ -1,5 +1,9 @@
 import mayflower.Color;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 public class Profile
 {
     private String name;
@@ -19,6 +23,19 @@ public class Profile
 
     public Profile(String name)
     {
+        boolean found = false;
+        try
+        {
+            Scanner s = new Scanner(new File("stats.txt"));
+            while(s.hasNextLine() && found == false)
+            {
+
+            }
+        }
+        catch(FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
         this.name = name;
 
     }
