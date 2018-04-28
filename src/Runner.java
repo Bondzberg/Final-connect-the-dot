@@ -1,12 +1,10 @@
-import mayflower.Mayflower;
-import mayflower.World;
-import mayflower.event.EventListener;
-import mayflower.ui.Button;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+
+import mayflower.Mayflower;
 
 public class Runner extends Mayflower
 {
