@@ -3,5 +3,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/mayflower3.2.0"/>
+	<classpathentry kind="lib" path="E:/GitHub/Final-connect-the-dot/mayflower3.2.0.jar"/>
 	<classpathentry kind="output" path="out/production/Final-connect-the-dot"/>
 </classpath>

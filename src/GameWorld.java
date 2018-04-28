@@ -14,7 +14,7 @@ public abstract class GameWorld extends World implements EventListener
     {
         Dots = new Dot[x][y];
         squares = new int[x-1][y-1];
-        dts = new HashMap();
+        //dts = new HashMap();
         for(int c=0;c<y;c++)
         {
             for(int r = 0;r<x;r++)
