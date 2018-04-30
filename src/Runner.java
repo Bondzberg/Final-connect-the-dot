@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
@@ -5,6 +6,12 @@ import java.util.Map;
 import java.util.Scanner;
 
 import mayflower.Mayflower;
+=======
+import mayflower.Mayflower;
+import mayflower.World;
+import mayflower.event.EventListener;
+import mayflower.ui.Button;
+>>>>>>> parent of abefd37... Merge branch 'master' of https://github.com/Bondzberg/Final-connect-the-dot
 
 public class Runner extends Mayflower
 {
@@ -17,6 +24,7 @@ public class Runner extends Mayflower
     }
     public void init()
     {
+<<<<<<< HEAD
         Map<String, Stats> stats = new HashMap<String, Stats>();
         try
         {
@@ -37,6 +45,9 @@ public class Runner extends Mayflower
         System.out.println(stats.get("Player2"));
         //gey
         Mayflower.setWorld(new MenuWorld());
+=======
+        Mayflower.setWorld(new GameWorld(3,3));
+>>>>>>> parent of abefd37... Merge branch 'master' of https://github.com/Bondzberg/Final-connect-the-dot
     }
     public void main()
     {
