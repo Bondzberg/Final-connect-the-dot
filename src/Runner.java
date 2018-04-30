@@ -4,12 +4,15 @@ import mayflower.event.EventListener;
 import mayflower.ui.Button;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 public class Runner extends Mayflower
 {
+    private Stats playerStats;
+
     public Runner()
     {
         super("Project ultra secret", 800, 600);
@@ -19,8 +22,6 @@ public class Runner extends Mayflower
     }
     public void init()
     {
-        
-
         Map<String, Stats> stats = new HashMap<String, Stats>();
         try
         {
@@ -33,14 +34,23 @@ public class Runner extends Mayflower
                 stats.put(arr[0], stat);
             }
             s.close();
+            System.out.println("What is your profile name? Type guest if new.");
+            Scanner k = new Scanner(System.in);
+            String name = k.next();
+            if(stats.containsKey(name))
+            {
+                playerStats = stats.get(name);
+                System.out.println(playerStats);
+            }
         }
         catch(FileNotFoundException e)
         {
             e.printStackTrace();
         }
-        System.out.println(stats.get("Player2"));
-        Mayflower.setWorld(new GameWorld(5,5));
+        Mayflower.setWorld(new MenuWorld(playerStats));
     }
+
+
     public void main()
     {
 
