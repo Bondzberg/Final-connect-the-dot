@@ -38,7 +38,7 @@ public class Runner extends Mayflower
             e.printStackTrace();
         }
         System.out.println(stats.get("Player2"));
-        Mayflower.setWorld(new MenuWorld());
+        Mayflower.setWorld(new GameWorld(5,5));
     }
     public void main()
     {
