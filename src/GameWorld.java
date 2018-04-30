@@ -152,10 +152,23 @@ public class GameWorld extends World implements EventListener
     {
         if(game.getWinner().equals(me))
         {
-            graphics.setBackground("img/win.jpg");
+            graphics.setBackground("imgs/win.png");
         }
         else
-            graphics.setBackground("img/lose.jpg");
+            graphics.setBackground("imgs/lose.jpg");
     }
+
+
+    Jonathan's 4-30 code:
+    if(isGameOver())
+    {
+        if(game.getWinner().equals(me))
+        {
+            Actor winner =
+        }
+        else
+            graphics.setBackground("imgs/lose.jpg");
+    }
+
      */
 }
