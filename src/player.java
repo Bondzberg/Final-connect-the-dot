@@ -13,10 +13,12 @@ public class player
     private MayflowerImage imageS;
     private MayflowerImage imageL;
     private int num;
+    private Color color;
 
     public player(Color color,int p)
     {
         num = p;
+        this.color = color;
         MayflowerImage square = new MayflowerImage("imgs/squares.png");
         for(int r = 0;r<square.getWidth();r++)
         {
@@ -58,5 +60,9 @@ public class player
 
     public int getNum() {
         return num;
+    }
+
+    public Color getColor() {
+        return color;
     }
 }

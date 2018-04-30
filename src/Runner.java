@@ -19,9 +19,9 @@ public class Runner extends Mayflower
     }
     public void init()
     {
-<<<<<<< HEAD
+
         Mayflower.setWorld(new GameWorld(3,3));
-=======
+
 
         Map<String, Stats> stats = new HashMap<String, Stats>();
         try
@@ -42,7 +42,7 @@ public class Runner extends Mayflower
         }
         System.out.println(stats.get("Player2"));
         Mayflower.setWorld(new GameWorld(5,5));
->>>>>>> cda4f9880a6e7ecd5f21f1b7e914241e2926b60d
+
     }
     public void main()
     {

@@ -10,39 +10,7 @@ import java.util.List;
 public class GameWorld extends World implements EventListener
 {
     private square[][] squares;
-<<<<<<< HEAD
-    private Line[][] Lines;
-    private HashMap<Line,List<square>> dts;
-    private Line selected;
 
-    public GameWorld(int x,int y)
-    {
-        Lines = new Line[x*2-1][y];
-        squares = new square[x-1][y-1];
-        dts = new HashMap();
-        selected = null;
-
-        for(int c=0;c<2*y-1;c++)
-        {
-            int z = x-1;
-            if(c%2==1)
-            {
-                z++;
-            }
-            for(int r = 0;r<z;r++)
-            {
-                Lines[c][r] = new Line("imgs/line.png",c+" "+r);
-                Lines[c][r].addEventListener(this);
-                addObject(Lines[c][r],c*50+50,r*50+50);
-                dts.put(Lines[c][r],new ArrayList<>());
-                Lines[c][r].addEventListener(this);
-                if(c%2==1) {
-                    Lines[c][r].setRotation(90);
-                    Lines[c][r].move(50);
-                }
-            }
-        }
-=======
     private HashMap<String,Line> lines;
     private HashMap<Line,List<square>> lts;
     private player p1;
@@ -59,8 +27,7 @@ public class GameWorld extends World implements EventListener
         p2 = new player(Color.PINK,2);
         pC = p1;
         scored = false;
->>>>>>> cda4f9880a6e7ecd5f21f1b7e914241e2926b60d
-
+        showText("Current player: 1",200,20,p1.getColor());
 
         for(int c=0;c<squares.length;c++)
         {
@@ -68,14 +35,7 @@ public class GameWorld extends World implements EventListener
             {
                 squares[c][r] = new square(this);
                 squares[c][r].setImage("imgs/empty.png");
-<<<<<<< HEAD
                 addObject(squares[c][r],c*50,r*50);
-                //dts.get(Lines[c][r]).add(squares[c][r]);
-               // dts.get(Lines[c+1][r]).add(squares[c][r]);
-                //dts.get(Lines[c][r+1]).add(squares[c][r]);
-                //dts.get(Lines[c+1][r+1]).add(squares[c][r]);
-
-=======
                 if(r==0)
                 {
                     Line top = new Line("imgs/lines.png","t "+c+" "+r);
@@ -101,7 +61,7 @@ public class GameWorld extends World implements EventListener
                     addObject(bottom,c*50,r*50+50);
                     bottom.addEventListener(this);
                 }
->>>>>>> cda4f9880a6e7ecd5f21f1b7e914241e2926b60d
+
 
                 if(c==0)
                 {
@@ -139,23 +99,10 @@ public class GameWorld extends World implements EventListener
     @Override
     public void onEvent(String s)
     {
-<<<<<<< HEAD
 
-        String[] cord = s.split(" ");
-        int x = Integer.valueOf(cord[0]);
-        int y = Integer.valueOf(cord[1]);
-        if(selected != null)
-=======
         List<square> i = lts.get(lines.get(s));
         for(square l:i)
->>>>>>> cda4f9880a6e7ecd5f21f1b7e914241e2926b60d
-        {
-            special(selected, Lines[x][y]);
-        }
-<<<<<<< HEAD
-        else
-            selected = Lines[x][y];
-=======
+            l.incrementVlaue();
         lines.get(s).clearEventListeners();
         Actor img = new Actor() {
             @Override
@@ -166,12 +113,20 @@ public class GameWorld extends World implements EventListener
         img.setImage(pC.getImageL());
         addObject(img,lines.get(s).getX(),lines.get(s).getY());
         img.setRotation(lines.get(s).getRotation());
-        //lines.get(s).setDefaultImage("imgs/line "+pC.getNum());
-        if(pC.equals(p1))
-            pC=p2;
-        else
-            pC=p1;
->>>>>>> cda4f9880a6e7ecd5f21f1b7e914241e2926b60d
+
+        if(!scored) {
+            if (pC.equals(p1)) {
+                pC = p2;
+                getTexts().clear();
+                showText("Current player: 2",200,20,p2.getColor());
+            }
+            else {
+                pC = p1;
+                getTexts().clear();
+                showText("Current player: 1",200,20,p1.getColor());
+            }
+        }
+        scored = false;
 
     }
 
@@ -182,24 +137,8 @@ public class GameWorld extends World implements EventListener
 
     }
 
-    public void special(Line dot1,Line dot2)
-    {
-        List<square> i = dts.get(dot1);
-        List<square> t = dts.get(dot2);
-        i.retainAll(t);
-        while(i.size()>1)
-        {
-            square square = i.get(0);
-            square.incrementVlaue();
-            dts.get(dot1).remove(square);
-            dts.get(dot2).remove(square);
-            i.remove(0);
-        }
-
-        if(i.size()==0)
-            selected =null;
-
-
+    public void setScored(boolean scored) {
+        this.scored = scored;
     }
 
     public player getpC() {
