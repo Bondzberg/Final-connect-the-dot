@@ -18,13 +18,15 @@ public class GameWorld extends World implements EventListener
     private player pC;
     private boolean scored;
 
-    public GameWorld(int x,int y)
+    public GameWorld(int x,int y,boolean ai)
     {
         lines = new HashMap<>();
-        squares = new square[x-1][y-1];
+        squares = new square[x][y];
         lts = new HashMap();
-        p1 = new player(Color.MEGENTA,1);
+        p1 = new player(Color.BLUE,1);
         p2 = new player(Color.PINK,2);
+        if(ai)
+            p2 = new AI(Color.PINK,2,this);
         pC = p1;
         scored = false;
         showText("Current player: 1",200,20,p1.getColor());
@@ -99,11 +101,12 @@ public class GameWorld extends World implements EventListener
     @Override
     public void onEvent(String s)
     {
-
+        System.out.println(s);
         List<square> i = lts.get(lines.get(s));
         for(square l:i)
             l.incrementVlaue();
         lines.get(s).clearEventListeners();
+
         Actor img = new Actor() {
             @Override
             public void act() {
@@ -127,6 +130,7 @@ public class GameWorld extends World implements EventListener
             }
         }
         scored = false;
+        lines.remove(s);
 
     }
 
@@ -144,4 +148,14 @@ public class GameWorld extends World implements EventListener
     public player getpC() {
         return pC;
     }
+
+    public HashMap<String, Line> getLines() {
+        return lines;
+    }
+
+    public HashMap<Line, List<square>> getLts() {
+        return lts;
+    }
+
+
 }

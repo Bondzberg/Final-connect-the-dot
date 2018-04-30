@@ -28,4 +28,8 @@ public class square extends Actor
             world.setScored(true);
         }
     }
+
+    public int getValue() {
+        return value;
+    }
 }

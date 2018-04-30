@@ -19,7 +19,7 @@ public class Runner extends Mayflower
     }
     public void init()
     {
-        
+
 
         Map<String, Stats> stats = new HashMap<String, Stats>();
         try
@@ -39,7 +39,7 @@ public class Runner extends Mayflower
             e.printStackTrace();
         }
         System.out.println(stats.get("Player2"));
-        Mayflower.setWorld(new GameWorld(5,5));
+        Mayflower.setWorld(new GameWorld(4,5,true));
     }
     public void main()
     {
