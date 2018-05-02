@@ -48,9 +48,9 @@ public class Runner extends Mayflower
             e.printStackTrace();
         }
 
-        //Mayflower.setWorld(new GameWorld(4,5,true));
+        Mayflower.setWorld(new GameWorld(4,5,true));
 
-        Mayflower.setWorld(new MenuWorld(playerStats));
+        //Mayflower.setWorld(new MenuWorld(playerStats));
 
     }
 

@@ -17,12 +17,14 @@ public class GameWorld extends World implements EventListener
     private player p2;
     private player pC;
     private boolean scored;
+    private boolean running;
 
     public GameWorld(int x,int y,boolean ai)
     {
         lines = new HashMap<>();
         squares = new square[x][y];
         lts = new HashMap();
+        running = true;
         p1 = new player(Color.BLUE,1);
         p2 = new player(Color.PINK,2);
         if(ai)
@@ -116,7 +118,13 @@ public class GameWorld extends World implements EventListener
         img.setImage(pC.getImageL());
         addObject(img,lines.get(s).getX(),lines.get(s).getY());
         img.setRotation(lines.get(s).getRotation());
+        if(isDone())
+        {
+            running=false;
+            showText("player " +pC.getNum()+" wins",500,500,pC.getColor());
+            return;
 
+        }
         if(!scored) {
             if (pC.equals(p1)) {
                 pC = p2;
@@ -132,6 +140,18 @@ public class GameWorld extends World implements EventListener
         scored = false;
         lines.remove(s);
 
+
+    }
+
+    public boolean isDone()
+    {
+        for(square[] square:squares)
+        {
+            for(square square1:square)
+                if(square1.getValue()!=4)
+                    return false;
+        }
+        return true;
     }
 
     @Override
@@ -139,6 +159,10 @@ public class GameWorld extends World implements EventListener
     {
 
 
+    }
+
+    public boolean isRunning() {
+        return running;
     }
 
     public void setScored(boolean scored) {
