@@ -38,7 +38,6 @@ public class Runner extends Mayflower
             if(stats.containsKey(name))
             {
                 playerStats = stats.get(name);
-                System.out.println(playerStats);
             }
         }
         catch(FileNotFoundException e)
@@ -46,9 +45,9 @@ public class Runner extends Mayflower
             e.printStackTrace();
         }
 
-        Mayflower.setWorld(new GameWorld(5,5,false));
+        //Mayflower.setWorld(new GameWorld(5,5,false));
 
-        //Mayflower.setWorld(new MenuWorld(playerStats));
+        Mayflower.setWorld(new MenuWorld(playerStats));
 
     }
 

@@ -31,19 +31,29 @@ public class Stats
         return wins;
     }
 
+    public void setWins(int w) {wins = w;}
+
     public int getLosses()
     {
         return losses;
     }
+
+    public void setLosses(int l){losses = l;}
 
     public int getTies()
     {
         return ties;
     }
 
+    public void setTies(int t){ties=t;}
+
     public Color getColor()
     {
         return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 
     public String colorToString()
