@@ -17,10 +17,11 @@ public class Winner extends AnimatedActor
      */
     public Winner()
     {
+        setImage("imgs/empty.png");
         speedX = (int)(1 + Math.random()*3);
         speedY = (int)(1 + Math.random()*3);
 
-        spin = new Animation(60, new String[]{
+        spin = new Animation(5, new String[]{
                 "imgs/coin/Spin (1).png",
                 "imgs/coin/Spin (2).png",
                 "imgs/coin/Spin (3).png",
@@ -29,7 +30,7 @@ public class Winner extends AnimatedActor
                 "imgs/coin/Spin (6).png",
         });
 
-        this.setAnimation(spin);
+        setAnimation(spin);
         spin.scale (.5);
     }
 
@@ -42,7 +43,7 @@ public class Winner extends AnimatedActor
         {
             speedX = -speedX;
         }
-        if(this.getX() > 800)
+        if(this.getX() > 770)
         {
             speedX = -speedX;
         }
@@ -50,10 +51,12 @@ public class Winner extends AnimatedActor
         {
             speedY = -speedY;
         }
-        if(this.getY() > 600)
+        if(this.getY() > 540)
         {
             speedY = -speedY;
         }
+
+        setLocation(getX() + speedX, getY() + speedY);
 
         super.act();
     }

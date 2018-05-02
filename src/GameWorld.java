@@ -17,14 +17,20 @@ public class GameWorld extends World implements EventListener
     private player p2;
     private player pC;
     private boolean scored;
+    private boolean running;
 
-    public GameWorld(int x,int y)
+    public GameWorld(int x,int y,boolean ai)
     {
+        addObject(new Winner(), 25, 25);
+
         lines = new HashMap<>();
-        squares = new square[x-1][y-1];
+        squares = new square[x][y];
         lts = new HashMap();
-        p1 = new player(Color.MEGENTA,1);
+        running = true;
+        p1 = new player(Color.BLUE,1);
         p2 = new player(Color.PINK,2);
+        if(ai)
+            p2 = new AI(Color.PINK,2,this);
         pC = p1;
         scored = false;
         showText("Current player: 1",200,20,p1.getColor());
@@ -99,11 +105,12 @@ public class GameWorld extends World implements EventListener
     @Override
     public void onEvent(String s)
     {
-
+        System.out.println(s);
         List<square> i = lts.get(lines.get(s));
         for(square l:i)
             l.incrementVlaue();
         lines.get(s).clearEventListeners();
+
         Actor img = new Actor() {
             @Override
             public void act() {
@@ -113,7 +120,26 @@ public class GameWorld extends World implements EventListener
         img.setImage(pC.getImageL());
         addObject(img,lines.get(s).getX(),lines.get(s).getY());
         img.setRotation(lines.get(s).getRotation());
+        if(isDone())
+        {
+            running=false;
+            String winner = "no one" ;
+            Color wins = Color.BLACK;
+            if(p1.getScore()>p2.getScore()) {
+                winner = "player " + 1;
+                wins = p1.getColor();
+            }
+            else if(p2.getScore()>p1.getScore()) {
+                winner = "player " + 2;
+                wins = p2.getColor();
+            }
+            showText(winner+" wins",500,500,wins);
 
+            //addObject(new Winner(), 25, 25);
+
+            return;
+
+        }
         if(!scored) {
             if (pC.equals(p1)) {
                 pC = p2;
@@ -127,14 +153,30 @@ public class GameWorld extends World implements EventListener
             }
         }
         scored = false;
+        lines.remove(s);
 
+
+    }
+
+    public boolean isDone()
+    {
+        for(square[] square:squares)
+        {
+            for(square square1:square)
+                if(square1.getValue()!=4)
+                    return false;
+        }
+        return true;
     }
 
     @Override
     public void act()
     {
 
+    }
 
+    public boolean isRunning() {
+        return running;
     }
 
     public void setScored(boolean scored) {
@@ -145,30 +187,11 @@ public class GameWorld extends World implements EventListener
         return pC;
     }
 
-
-    /*
-    Jonathan's 4-26 code:
-    if(isGameOver())
-    {
-        if(game.getWinner().equals(me))
-        {
-            graphics.setBackground("imgs/win.png");
-        }
-        else
-            graphics.setBackground("imgs/lose.jpg");
+    public HashMap<String, Line> getLines() {
+        return lines;
     }
 
-
-    Jonathan's 4-30 code:
-    if(isGameOver())
-    {
-        if(game.getWinner().equals(me))
-        {
-            Actor winner =
-        }
-        else
-            graphics.setBackground("imgs/lose.jpg");
+    public HashMap<Line, List<square>> getLts() {
+        return lts;
     }
-
-     */
 }

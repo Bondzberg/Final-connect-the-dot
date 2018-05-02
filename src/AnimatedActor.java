@@ -14,16 +14,15 @@ public class AnimatedActor extends Actor
     private Animation animation;
     private Timer animationTimer;
 
-    public AnimatedActor() 
+    public AnimatedActor()
     {
-        animation = null;
-        animationTimer = new Timer((int)animation.getFrameRate());
+
     }
     
     public void setAnimation(Animation a)
     {
         animation = a;
-        animationTimer.reset();
+        animationTimer = new Timer((int)(100000000/animation.getFrameRate()));
     }
     
     public void act()
@@ -31,9 +30,9 @@ public class AnimatedActor extends Actor
         if(animation != null)
         {
             if(animationTimer.isDone())
-            {   
-                animationTimer.reset();         
+            {
                 this.setImage(animation.getNextFrame());
+                animationTimer.reset();
             }
         }
     }
