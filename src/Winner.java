@@ -9,8 +9,8 @@ public class Winner extends AnimatedActor
     // instance variables - replace the example below with your own
     private Animation spin;
 
-    private int speedX;
-    private int speedY;
+    private double speedX;
+    private double speedY;
 
     /**
      * Constructor for objects of class Coin
@@ -18,8 +18,8 @@ public class Winner extends AnimatedActor
     public Winner()
     {
         setImage("imgs/empty.png");
-        speedX = (int)(1 + Math.random()*3);
-        speedY = (int)(1 + Math.random()*3);
+        speedX = 1+Math.random()*9;
+        speedY = 1+Math.random()*9;
 
         spin = new Animation(5, new String[]{
                 "imgs/coin/Spin (1).png",
