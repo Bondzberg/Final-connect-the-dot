@@ -34,9 +34,7 @@ public class Runner extends Mayflower
                 stats.put(arr[0], stat);
             }
             s.close();
-            System.out.println("What is your profile name? Type guest if new.");
-            Scanner k = new Scanner(System.in);
-            String name = k.next();
+            String name = Mayflower.ask("What is your profile name? Type guest if new.");
             if(stats.containsKey(name))
             {
                 playerStats = stats.get(name);
