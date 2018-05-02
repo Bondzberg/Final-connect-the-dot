@@ -3,7 +3,7 @@ import mayflower.event.EventListener;
 
 public class StatsWorld extends World implements EventListener
 {
-    private Stats playerStats;
+    public static Stats playerStats;
 
     public StatsWorld()
     {
@@ -30,12 +30,7 @@ public class StatsWorld extends World implements EventListener
 
     }
 
-    public Stats getStats()
-    {
-        return playerStats;
-    }
-
-    public void setPlayerStats(Stats s)
+    public void setStats(Stats s)
     {
         playerStats = s;
     }

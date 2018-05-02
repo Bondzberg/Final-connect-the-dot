@@ -21,10 +21,10 @@ public class ProfileWorld extends StatsWorld implements EventListener
         back.getImage().scale(0.8);
         addObject(back, 300, 400);
         showText("Back", 360, 455);
-        showText("Wins: " + world.getStats().getWins(), 100, 100);
-        showText("Losses: " + world.getStats().getLosses(), 100, 175);
-        showText("Ties: " + world.getStats().getTies(), 100, 250);
-        showText("Color: " + world.getStats().colorToString(), 100, 325);
+        showText("Wins: " + StatsWorld.playerStats.getWins(), 100, 100);
+        showText("Losses: " + StatsWorld.playerStats.getLosses(), 100, 175);
+        showText("Ties: " + StatsWorld.playerStats.getTies(), 100, 250);
+        showText("Color: " + StatsWorld.playerStats.colorToString(), 100, 325);
     }
 
     public void onEvent(String s)

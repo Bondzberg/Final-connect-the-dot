@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 public class Runner extends Mayflower
 {
+    public StatsWorld s;
     private Stats playerStats;
 
     public Runner()
@@ -44,10 +45,10 @@ public class Runner extends Mayflower
         {
             e.printStackTrace();
         }
-
+        s=new StatsWorld(playerStats);
         //Mayflower.setWorld(new GameWorld(5,5,false));
 
-        Mayflower.setWorld(new MenuWorld(playerStats));
+        Mayflower.setWorld(new MenuWorld(StatsWorld.playerStats));
 
     }
 
