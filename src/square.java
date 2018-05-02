@@ -26,6 +26,7 @@ public class square extends Actor
         {
             setImage(world.getpC().getImageS());
             world.setScored(true);
+            world.getpC().setScore(world.getpC().getScore()+1);
         }
     }
 

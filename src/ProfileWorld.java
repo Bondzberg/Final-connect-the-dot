@@ -39,4 +39,6 @@ public class ProfileWorld extends World implements EventListener
     {
 
     }
+    /*java.awt.Color colour = JColorChooser.showDialog(new JPanel(),"something", java.awt.Color.BLUE);
+        color = new Color(colour.getBlue(),colour.getRed(),colour.getGreen());*/
 }

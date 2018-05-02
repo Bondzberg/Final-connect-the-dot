@@ -121,7 +121,17 @@ public class GameWorld extends World implements EventListener
         if(isDone())
         {
             running=false;
-            showText("player " +pC.getNum()+" wins",500,500,pC.getColor());
+            String winner = "no one" ;
+            Color wins = Color.BLACK;
+            if(p1.getScore()>p2.getScore()) {
+                winner = "player " + 1;
+                wins = p1.getColor();
+            }
+            else if(p2.getScore()>p1.getScore()) {
+                winner = "player " + 2;
+                wins = p2.getColor();
+            }
+            showText(winner+" wins",500,500,wins);
             return;
 
         }

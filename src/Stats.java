@@ -104,7 +104,7 @@ public class Stats
         {
             return "White";
         }
-        return null;
+        return "Custom";
     }
     public String toString()
     {
