@@ -48,55 +48,59 @@ public class Stats
 
     public String colorToString()
     {
-        if(color.equals(Color.BLUE))
+        if(color == null)
+        {
+            return "None";
+        }
+        else if(color.equals(Color.BLUE))
         {
             return "Blue";
         }
-        if(color.equals(Color.YELLOW))
+        else if(color.equals(Color.YELLOW))
         {
             return "Yellow";
         }
-        if(color.equals(Color.BLACK))
+        else if(color.equals(Color.BLACK))
         {
             return "Black";
         }
-        if(color.equals(Color.PINK))
+        else if(color.equals(Color.PINK))
         {
             return "Pink";
         }
-        if(color.equals(Color.RED))
+        else if(color.equals(Color.RED))
         {
             return "Red";
         }
-        if(color.equals(Color.CYAN))
+        else if(color.equals(Color.CYAN))
         {
             return "Cyan";
         }
-        if(color.equals(Color.DARK_GRAY))
+        else if(color.equals(Color.DARK_GRAY))
         {
             return "Dark Gray";
         }
-        if(color.equals(Color.GRAY))
+        else if(color.equals(Color.GRAY))
         {
             return "Gray";
         }
-        if(color.equals(Color.GREEN))
+        else if(color.equals(Color.GREEN))
         {
             return "Green";
         }
-        if(color.equals(Color.LIGHT_GRAY))
+        else if(color.equals(Color.LIGHT_GRAY))
         {
             return "Light Gray";
         }
-        if(color.equals(Color.MAGENTA))
+        else if(color.equals(Color.MAGENTA))
         {
             return "Magenta";
         }
-        if(color.equals(Color.ORANGE))
+        else if(color.equals(Color.ORANGE))
         {
             return "Orange";
         }
-        if(color.equals(Color.WHITE))
+        else if(color.equals(Color.WHITE))
         {
             return "White";
         }
