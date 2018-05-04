@@ -171,9 +171,10 @@ public class GameWorld extends World implements EventListener
 
     }
 
-    public void proccess(String s)
+    public void proccess(String s,int i)
     {
-        onEvent(s);
+        if(i==pC.getNum())
+            onEvent(s);
     }
 
     public boolean isRunning() {
