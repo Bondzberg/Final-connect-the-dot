@@ -22,9 +22,9 @@ public class GameWorld extends World implements EventListener
     public GameWorld(int x,int y,boolean ai)
     {
         //addObject(new Winner(), 25, 25);
-        for(int i = 0; i < 50; i++)
+        for(int i = 0; i < 5; i++)
         {
-            addObject(new Winner(), 25, 25);
+            addObject(new Winner(), 400, 300);
         }
 
         lines = new HashMap<>();
