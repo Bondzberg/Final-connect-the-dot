@@ -38,7 +38,8 @@ public class ProfileWorld extends StatsWorld implements EventListener
         Actor img = new Actor(){
             public void act(){}
         };
-        addObject(img, 200, 200);
+        img.setImage(square);
+        addObject(img, 200, 290);
     }
 
     public void onEvent(String s)

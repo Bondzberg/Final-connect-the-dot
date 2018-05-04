@@ -11,19 +11,12 @@ public class Stats
     private int ties;
     private Color color;
 
-    public Stats(int w, int l, int t, String c)
+    public Stats(int w, int l, int t, Color c)
     {
         wins = w;
         losses = l;
         ties = t;
-        if(c.equals("Yellow"))
-        {
-            color = Color.YELLOW;
-        }
-        else if(c.equals("Blue"))
-        {
-            color = Color.BLUE;
-        }
+        color = c;
     }
 
     public int getWins()
