@@ -1,30 +1,54 @@
+import mayflower.*;
 import mayflower.Color;
-import mayflower.Mayflower;
-import mayflower.MayflowerImage;
-import mayflower.World;
 import mayflower.event.EventListener;
 import mayflower.ui.Button;
+import org.w3c.dom.css.Rect;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.Map;
 
-public class ProfileWorld extends World implements EventListener
+public class ProfileWorld extends StatsWorld implements EventListener
 {
     private Button back;
+    private Button colorButton;
     private MenuWorld world;
 
-    public ProfileWorld(MenuWorld world, Stats s)
+    private Actor img;
+
+    public ProfileWorld(MenuWorld world)
     {
         this.world = world;
         setBackground("imgs/Background.png");
         back = new Button("imgs/Button.png", "back");
         back.addEventListener(this);
         back.getImage().scale(0.8);
+        colorButton = new Button("imgs/Button.png", "color");
+        colorButton.addEventListener(this);
+        colorButton.getImage().scale(.5);
         addObject(back, 300, 400);
+        addObject(colorButton, 260, 290);
         showText("Back", 360, 455);
-        showText("Wins: " + s.getWins(), 100, 100);
-        showText("Losses: " + s.getLosses(), 100, 175);
-        showText("Ties: " + s.getTies(), 100, 250);
-        showText("Color: " + s.colorToString(), 100, 325);
+        showText("Wins: " + StatsWorld.playerStats.getWins(), 100, 100);
+        showText("Losses: " + StatsWorld.playerStats.getLosses(), 100, 175);
+        showText("Ties: " + StatsWorld.playerStats.getTies(), 100, 250);
+        showText("Color: ", 100, 325);
+        showText("Change Color", 15, 275, 322);
+        MayflowerImage square = new MayflowerImage("imgs/squares.png");
+        for(int r = 0;r<square.getWidth();r++)
+        {
+
+            for(int c =0;c<square.getHeight();c++)
+            {
+
+                square.setColorAt(r,c,StatsWorld.playerStats.getColor());
+            }
+        }
+        img = new Actor(){
+            public void act(){}
+        };
+        img.setImage(square);
+        addObject(img, 200, 290);
     }
 
     public void onEvent(String s)
@@ -33,12 +57,31 @@ public class ProfileWorld extends World implements EventListener
         {
             Mayflower.setWorld(world);
         }
+        else if(s.equals("color"))
+        {
+            java.awt.Color colour = JColorChooser.showDialog(new JPanel(),"something", java.awt.Color.BLUE);
+            StatsWorld.playerStats.setColor(new Color(colour.getRed(),colour.getGreen(),colour.getBlue()));
+            updateColor();
+        }
     }
 
     public void act()
     {
 
     }
-    /*java.awt.Color colour = JColorChooser.showDialog(new JPanel(),"something", java.awt.Color.BLUE);
-        color = new Color(colour.getBlue(),colour.getRed(),colour.getGreen());*/
+
+    public void updateColor()
+    {
+        MayflowerImage square = new MayflowerImage("imgs/squares.png");
+        for(int r = 0;r<square.getWidth();r++)
+        {
+
+            for(int c =0;c<square.getHeight();c++)
+            {
+                square.setColorAt(r,c,StatsWorld.playerStats.getColor());
+            }
+        }
+        img.setImage(square);
+    }
+
 }

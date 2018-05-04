@@ -1,5 +1,5 @@
 
-import java.awt.Color;
+import mayflower.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -11,19 +11,12 @@ public class Stats
     private int ties;
     private Color color;
 
-    public Stats(int w, int l, int t, String c)
+    public Stats(int w, int l, int t, Color c)
     {
         wins = w;
         losses = l;
         ties = t;
-        if(c.equals("Yellow"))
-        {
-            color = Color.YELLOW;
-        }
-        else if(c.equals("Blue"))
-        {
-            color = Color.BLUE;
-        }
+        color = c;
     }
 
     public int getWins()
@@ -31,19 +24,34 @@ public class Stats
         return wins;
     }
 
+    public void setWins(int w) {wins = w;}
+
     public int getLosses()
     {
         return losses;
     }
+
+    public void setLosses(int l){losses = l;}
 
     public int getTies()
     {
         return ties;
     }
 
+    public void setTies(int t){ties=t;}
+
     public Color getColor()
     {
         return color;
+    }
+
+    public java.awt.Color getJavaColor()
+    {
+        return new java.awt.Color(color.getRed(),color.getGreen(),color.getBlue());
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 
     public String colorToString()
@@ -91,10 +99,6 @@ public class Stats
         else if(color.equals(Color.LIGHT_GRAY))
         {
             return "Light Gray";
-        }
-        else if(color.equals(Color.MAGENTA))
-        {
-            return "Magenta";
         }
         else if(color.equals(Color.ORANGE))
         {
