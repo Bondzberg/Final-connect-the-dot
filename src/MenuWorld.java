@@ -7,14 +7,13 @@ import mayflower.ui.Button;
 
 import java.util.Map;
 
-public class MenuWorld extends World implements EventListener
+public class MenuWorld extends StatsWorld implements EventListener
 {
     private Button play, profile;
-    private Stats playerStats;
 
     public MenuWorld(Stats s)
     {
-        playerStats = s;
+        super(s);
         play = new Button("imgs/Button.png", "play");
         play.addEventListener(this);
         play.getImage().scale(0.8);
@@ -36,7 +35,7 @@ public class MenuWorld extends World implements EventListener
         }
         else if(s.equals("profile"))
         {
-            Mayflower.setWorld(new ProfileWorld(this, playerStats));
+            Mayflower.setWorld(new ProfileWorld(this));
         }
     }
     public void act()
