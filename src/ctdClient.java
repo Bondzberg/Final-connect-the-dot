@@ -32,7 +32,12 @@ public class ctdClient extends Client
             world.win();
         }
         else
-            world.proccess(s,world.getNum());
+        {
+            int value = Integer.valueOf(strings[strings.length-1]);
+            String ss = strings[0]+ " " + strings[1] + " "+strings[2];
+            world.proccess(ss,value);
+        }
+
     }
 
     @Override

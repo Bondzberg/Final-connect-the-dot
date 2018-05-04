@@ -15,7 +15,6 @@ public class ClientWorld extends GameWorld
         Mayflower.setWorld(this);
     }
 
-    @Override
     public void onEvent(String s)
     {
         client.send(s);

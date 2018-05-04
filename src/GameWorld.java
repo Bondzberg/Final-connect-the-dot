@@ -179,10 +179,65 @@ public class GameWorld extends World implements EventListener
 
     }
 
-    public void proccess(String s,int i)
+    public void proccess(String s,int j)
     {
-        if(i==pC.getNum())
-            onEvent(s);
+        if(j==pC.getNum())
+        {
+
+
+                System.out.println(s);
+                List<square> i = lts.get(lines.get(s));
+                for(square l:i)
+                    l.incrementVlaue();
+                lines.get(s).clearEventListeners();
+
+                Actor img = new Actor() {
+                    @Override
+                    public void act() {
+
+                    }
+                };
+                img.setImage(pC.getImageL());
+                addObject(img,lines.get(s).getX(),lines.get(s).getY());
+                img.setRotation(lines.get(s).getRotation());
+                if(isDone())
+                {
+                    running=false;
+                    String winner = "no one" ;
+                    Color wins = Color.BLACK;
+                    if(p1.getScore()>p2.getScore()) {
+                        winner = "player " + 1;
+                        wins = p1.getColor();
+                    }
+                    else if(p2.getScore()>p1.getScore()) {
+                        winner = "player " + 2;
+                        wins = p2.getColor();
+                    }
+                    showText(winner+" wins",500,500,wins);
+
+                    //addObject(new Winner(), 25, 25);
+
+                    return;
+
+                }
+                if(!scored) {
+                    if (pC.equals(p1)) {
+                        pC = p2;
+                        getTexts().clear();
+                        showText("Current player: 2",200,20,p2.getColor());
+                    }
+                    else {
+                        pC = p1;
+                        getTexts().clear();
+                        showText("Current player: 1",200,20,p1.getColor());
+                    }
+                }
+                scored = false;
+                lines.remove(s);
+
+
+
+        }
     }
 
     public boolean isRunning() {

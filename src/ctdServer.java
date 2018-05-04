@@ -20,8 +20,8 @@ public class ctdServer extends Server
     public void process(int i, String s)
     {
         int two =ptp.get(i);
-        send(two,s);
-        send(i,s);
+        send(two,s+" "+(i%2+1));
+        send(i,s+" "+(i%2+1));
     }
 
     @Override
@@ -36,8 +36,8 @@ public class ctdServer extends Server
             ptp.put(two,one);
             send(one,String.valueOf("world " +5+" "+5));
             send(two,String.valueOf("world " +5+" "+5));
-            send(one,String.valueOf("player" +one%2+1));
-            send(two,String.valueOf("player" +two%2+1));
+            send(one,String.valueOf("player " +(one%2+1)));
+            send(two,String.valueOf("player " +(two%2+1)));
         }
     }
 
@@ -45,7 +45,7 @@ public class ctdServer extends Server
     public void onExit(int i)
     {
         int two = ptp.get(i);
-        send(i,"dis");
+        send(two,"dis");
 
     }
 }
