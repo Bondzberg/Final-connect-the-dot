@@ -1,10 +1,10 @@
+import mayflower.*;
 import mayflower.Color;
-import mayflower.Mayflower;
-import mayflower.MayflowerImage;
-import mayflower.World;
 import mayflower.event.EventListener;
 import mayflower.ui.Button;
+import org.w3c.dom.css.Rect;
 
+import java.awt.*;
 import java.util.Map;
 
 public class ProfileWorld extends StatsWorld implements EventListener
@@ -24,7 +24,21 @@ public class ProfileWorld extends StatsWorld implements EventListener
         showText("Wins: " + StatsWorld.playerStats.getWins(), 100, 100);
         showText("Losses: " + StatsWorld.playerStats.getLosses(), 100, 175);
         showText("Ties: " + StatsWorld.playerStats.getTies(), 100, 250);
-        showText("Color: " + StatsWorld.playerStats.colorToString(), 100, 325);
+        showText("Color: ", 100, 325);
+        MayflowerImage square = new MayflowerImage("imgs/squares.png");
+        for(int r = 0;r<square.getWidth();r++)
+        {
+
+            for(int c =0;c<square.getHeight();c++)
+            {
+
+                square.setColorAt(r,c,StatsWorld.playerStats.getColor());
+            }
+        }
+        Actor img = new Actor(){
+            public void act(){}
+        };
+        addObject(img, 200, 200);
     }
 
     public void onEvent(String s)

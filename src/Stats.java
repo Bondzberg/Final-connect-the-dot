@@ -1,5 +1,5 @@
 
-import java.awt.Color;
+import mayflower.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -52,6 +52,11 @@ public class Stats
         return color;
     }
 
+    public java.awt.Color getJavaColor()
+    {
+        return new java.awt.Color(color.getRed(),color.getGreen(),color.getBlue());
+    }
+
     public void setColor(Color color) {
         this.color = color;
     }
@@ -101,10 +106,6 @@ public class Stats
         else if(color.equals(Color.LIGHT_GRAY))
         {
             return "Light Gray";
-        }
-        else if(color.equals(Color.MAGENTA))
-        {
-            return "Magenta";
         }
         else if(color.equals(Color.ORANGE))
         {
