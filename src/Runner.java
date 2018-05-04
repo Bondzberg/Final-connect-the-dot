@@ -11,6 +11,7 @@ public class Runner extends Mayflower
 {
     public StatsWorld s;
     private Stats playerStats;
+    private String name;
 
     public Runner()
     {
@@ -37,7 +38,7 @@ public class Runner extends Mayflower
                 }
             }
             s.close();
-            String name = Mayflower.ask("What is your profile name?");
+            name = Mayflower.ask("What is your profile name?");
             if(stats.containsKey(name))
             {
                 playerStats = stats.get(name);
@@ -51,7 +52,7 @@ public class Runner extends Mayflower
         {
             e.printStackTrace();
         }
-        s=new StatsWorld(playerStats);
+        s = new StatsWorld(playerStats, name);
         //Mayflower.setWorld(new GameWorld(5,5,false));
 
         Mayflower.setWorld(new MenuWorld(StatsWorld.playerStats));

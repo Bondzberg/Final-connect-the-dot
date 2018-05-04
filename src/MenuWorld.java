@@ -13,7 +13,6 @@ public class MenuWorld extends StatsWorld implements EventListener
 
     public MenuWorld(Stats s)
     {
-        super(s);
         play = new Button("imgs/Button.png", "play");
         play.addEventListener(this);
         play.getImage().scale(0.8);
