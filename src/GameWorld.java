@@ -21,6 +21,12 @@ public class GameWorld extends World implements EventListener
 
     public GameWorld(int x,int y,boolean ai)
     {
+        //addObject(new Winner(), 25, 25);
+        for(int i = 0; i < 50; i++)
+        {
+            addObject(new Winner(), 25, 25);
+        }
+
         lines = new HashMap<>();
         squares = new square[x][y];
         lts = new HashMap();
@@ -132,6 +138,9 @@ public class GameWorld extends World implements EventListener
                 wins = p2.getColor();
             }
             showText(winner+" wins",500,500,wins);
+
+            //addObject(new Winner(), 25, 25);
+
             return;
 
         }
@@ -168,7 +177,6 @@ public class GameWorld extends World implements EventListener
     public void act()
     {
 
-
     }
 
     public void proccess(String s)
@@ -195,6 +203,4 @@ public class GameWorld extends World implements EventListener
     public HashMap<Line, List<square>> getLts() {
         return lts;
     }
-
-
 }
