@@ -169,6 +169,12 @@ public class GameWorld extends World implements EventListener
         img.setRotation(lines.get(s).getRotation());
         if(isDone())
         {
+            for(int o = 0; o < 60; o++)
+            {
+                Winner a = new Winner();
+                a.scale(.5);
+                addObject(a, 350, 250);
+            }
 
             String winner = "no one" ;
             Color wins = Color.BLACK;
