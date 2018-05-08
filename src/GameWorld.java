@@ -1,11 +1,10 @@
 import mayflower.Actor;
 import mayflower.Color;
+import mayflower.Mayflower;
 import mayflower.World;
 import mayflower.event.EventListener;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class GameWorld extends World implements EventListener
 {
@@ -18,6 +17,8 @@ public class GameWorld extends World implements EventListener
     private player pC;
     private boolean scored;
     private boolean running;
+    private Queue<Actor> actors;
+    private Queue<Integer> x,y,rot;
 
     public GameWorld(int x,int y,boolean ai)
     {
@@ -46,6 +47,10 @@ public class GameWorld extends World implements EventListener
 
     public void init(int x, int y)
     {
+        actors = new LinkedList<>();
+        this.x = new LinkedList<>();
+        this.y = new LinkedList<>();
+        rot = new LinkedList<>();
         lines = new HashMap<>();
         squares = new square[x][y];
         lts = new HashMap();
@@ -228,11 +233,12 @@ public class GameWorld extends World implements EventListener
     public void act()
     {
 
+
     }
 
     public void proccess(String s,int j)
     {
-        if(j==pC.getNum())
+        if(j==pC.getNum()||j==2)
         {
 
 
@@ -251,6 +257,7 @@ public class GameWorld extends World implements EventListener
                 img.setImage(pC.getImageL());
                 addObject(img,lines.get(s).getX(),lines.get(s).getY());
                 img.setRotation(lines.get(s).getRotation());
+
                 if(isDone())
                 {
                     running=false;

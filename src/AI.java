@@ -55,11 +55,12 @@ public class AI extends player
                 while (world.isRunning()) {
                     if (!working && world.getpC().getNum() == getNum()) {
                         working = true;
-                        world.onEvent(getNextMove());
+                        world.proccess(getNextMove(),2);
                         working = false;
+                        yield();
                     }
                     try {
-                        sleep(34);
+                        sleep(64);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
