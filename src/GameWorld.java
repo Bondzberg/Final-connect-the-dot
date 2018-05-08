@@ -21,10 +21,24 @@ public class GameWorld extends World implements EventListener
 
     public GameWorld(int x,int y,boolean ai)
     {
-        //addObject(new Winner(), 25, 25);
-        for(int i = 0; i < 5; i++)
+        /*
+        Actor bounds = new Actor() {
+            @Override
+            public void act() {
+
+            }
+        };
+
+
+        bounds.setImage("imgs/400x300.png");
+        addObject(bounds, 200, 150);
+        */
+
+        for(int i = 0; i < 60; i++)
         {
-            addObject(new Winner(), 400, 300);
+            Winner a = new Winner();
+            a.scale(.5);
+            addObject(a, 350, 250);
         }
 
         lines = new HashMap<>();

@@ -18,8 +18,10 @@ public class Winner extends AnimatedActor
     public Winner()
     {
         setImage("imgs/empty.png");
-        speed = 1+Math.random()*9;
-        direction = (int) (-180 + Math.random()*360);
+        speed = 2+Math.random()*5;
+        //speed = 9;
+        direction = (int) (-179 + Math.random()*360);
+        //direction = 55;
         setRotation(direction);
 
         spin = new Animation(5, new String[]{
@@ -37,44 +39,39 @@ public class Winner extends AnimatedActor
 
     public void act()
     {
+        //System.out.println("y: " + getCenterY());
+        //System.out.println("x: " + getCenterX());
         //Actor[] touching = getIntersectingObjects(AnimatedActor);  //gets an array of touching Actors
         // ^^^ might be used later to incorporate coin-collision
-
-        if(this.getCenterX() < 100)
+        if(this.getX() <= -20)
         {
-            if(direction >= 0)
+            if(direction <= 200)
             {
                 direction = direction - 2*(90-(180 - direction));
                 setRotation(direction);
             }
             else
             {
-                direction = direction + 2*(180 - Math.abs(direction));
+                direction = direction -(2*(90-(180-direction)));
                 setRotation(direction);
             }
-
         }
-        else if(this.getCenterX() > 700)
+        else if(this.getX() > 700)
         {
 
-            if(direction >= 0)
+            if(direction < 0)
             {
-                direction = direction + 2*(90 - direction);
+                direction = direction - (2*(90 - Math.abs(direction)));
                 setRotation(direction);
             }
             else
             {
-                direction = direction - 2*(90 - Math.abs(direction));
+                direction = direction + (2*(90 - Math.abs(direction)));
                 setRotation(direction);
             }
 
         }
-        else if(this.getCenterY() < 100)
-        {
-            direction = -direction;
-            setRotation(direction);
-        }
-        else if(this.getCenterY() > 500)
+        else if(this.getY() <= -20 || (this.getY() >= 500))
         {
             direction = -direction;
             setRotation(direction);
