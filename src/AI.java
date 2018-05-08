@@ -53,13 +53,13 @@ public class AI extends player
         public class Thread1 extends Thread {
             public void run() {
                 while (world.isRunning()) {
-                    if (world.getpC().getNum() == getNum() && !working) {
+                    if (!working && world.getpC().getNum() == getNum()) {
                         working = true;
                         world.onEvent(getNextMove());
                         working = false;
                     }
                     try {
-                        sleep(17);
+                        sleep(34);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

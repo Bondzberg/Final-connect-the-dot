@@ -14,6 +14,7 @@ public class player
     private MayflowerImage imageL;
     private int num;
     private Color color;
+    private Stats stats;
 
     public player(Color color,int p)
     {
@@ -40,6 +41,7 @@ public class player
             }
         }
         imageL = line;
+        stats = new Stats(0,0,0,color);
     }
 
     public MayflowerImage getImageL() {
