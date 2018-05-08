@@ -22,13 +22,6 @@ public class GameWorld extends World implements EventListener
 
     public GameWorld(int x,int y,boolean ai)
     {
-        //addObject(new Winner(), 25, 25);
-        /*for(int i = 0; i < 50; i++)
-        {
-            addObject(new Winner(), 25, 25);
-        }*/
-
-
         p1 = new player(Color.BLUE,1);
         p2 = new player(Color.PINK,2);
         if(ai)
@@ -181,6 +174,12 @@ public class GameWorld extends World implements EventListener
         img.setRotation(lines.get(s).getRotation());
         if(isDone())
         {
+            for(int o = 0; o < 60; o++)
+            {
+                Winner a = new Winner();
+                a.scale(.5);
+                addObject(a, 350, 250);
+            }
 
             String winner = "no one" ;
             Color wins = Color.BLACK;
