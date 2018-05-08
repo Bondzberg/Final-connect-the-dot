@@ -21,13 +21,6 @@ public class GameWorld extends World implements EventListener
 
     public GameWorld(int x,int y,boolean ai)
     {
-        //addObject(new Winner(), 25, 25);
-        /*for(int i = 0; i < 50; i++)
-        {
-            addObject(new Winner(), 25, 25);
-        }*/
-
-
         p1 = new player(Color.BLUE,1);
         p2 = new player(Color.PINK,2);
         if(ai)

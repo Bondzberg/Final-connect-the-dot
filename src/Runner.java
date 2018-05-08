@@ -23,6 +23,7 @@ public class Runner extends Mayflower
     }
     public void init()
     {
+        //showBounds(true);
         Map<String, Stats> stats = new HashMap<String, Stats>();
         try
         {
