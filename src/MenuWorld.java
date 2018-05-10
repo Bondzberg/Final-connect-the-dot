@@ -10,6 +10,7 @@ import java.util.Map;
 public class MenuWorld extends StatsWorld implements EventListener
 {
     private Button play, profile;
+    private player p1,p2;
 
     public MenuWorld(Stats s)
     {

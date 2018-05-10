@@ -1,5 +1,6 @@
 import mayflower.Color;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AI extends player
@@ -18,38 +19,48 @@ public class AI extends player
 
     public String getNextMove()
     {
-        String min = "";
-        int mins =-1;
+        List<String> min = new ArrayList<>();
+        int mina = 50;
         for(Line line:world.getLines().values())
         {
+            int at =0;
             List<square> squares = world.getLts().get(line);
             for(square square:squares)
             {
-                if(square.getValue()>mins)
-                {
-                    min = line.getAct();
-                }
+                at+=square.getValue();
                 if(square.getValue()==3)
                 {
                     return line.getAct();
                 }
             }
+            if(at<mina)
+            {
+                mina = at;
+                min = new ArrayList<>();
+                min.add(line.getAct());
+            }
+            else if(at==mina)
+            {
+                min.add(line.getAct());
+            }
 
         }
-        return min;
+        String ret = min.get((int)(Math.random()*min.size()));
+        return ret ;
     }
 
 
         public class Thread1 extends Thread {
             public void run() {
                 while (world.isRunning()) {
-                    if (world.getpC().getNum() == getNum() && !working) {
+                    if (!working && world.getpC().getNum() == getNum()) {
                         working = true;
-                        world.onEvent(getNextMove());
+                        world.proccess(getNextMove(),2);
                         working = false;
+                        yield();
                     }
                     try {
-                        sleep(17);
+                        sleep(64);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

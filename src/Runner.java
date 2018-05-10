@@ -1,11 +1,13 @@
 import mayflower.Color;
 import mayflower.Mayflower;
+import mayflower.Timer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.TimerTask;
 
 public class Runner extends Mayflower
 {
@@ -22,6 +24,7 @@ public class Runner extends Mayflower
     }
     public void init()
     {
+        //showBounds(true);
         Map<String, Stats> stats = new HashMap<String, Stats>();
         try
         {
@@ -54,6 +57,7 @@ public class Runner extends Mayflower
         }
         s = new StatsWorld(playerStats, name);
         //Mayflower.setWorld(new GameWorld(5,5,false));
+
 
         Mayflower.setWorld(new MenuWorld(StatsWorld.playerStats));
     }
