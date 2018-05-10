@@ -7,7 +7,7 @@ import mayflower.ui.Button;
 
 import java.util.Map;
 
-public class MenuWorld extends StatsWorld implements EventListener
+public class MenuWorld extends World implements EventListener
 {
     private Button play, profile;
     private player p1,p2;

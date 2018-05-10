@@ -6,9 +6,10 @@ import org.w3c.dom.css.Rect;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.Map;
 
-public class ProfileWorld extends StatsWorld implements EventListener
+public class ProfileWorld extends World implements EventListener
 {
     private Button back;
     private Button colorButton;
@@ -29,9 +30,9 @@ public class ProfileWorld extends StatsWorld implements EventListener
         addObject(back, 300, 400);
         addObject(colorButton, 260, 290);
         showText("Back", 360, 455);
-        showText("Wins: " + StatsWorld.playerStats.getWins(), 100, 100);
-        showText("Losses: " + StatsWorld.playerStats.getLosses(), 100, 175);
-        showText("Ties: " + StatsWorld.playerStats.getTies(), 100, 250);
+        showText("Wins: " + Runner.playerStats.getWins(), 100, 100);
+        showText("Losses: " + Runner.playerStats.getLosses(), 100, 175);
+        showText("Ties: " + Runner.playerStats.getTies(), 100, 250);
         showText("Color: ", 100, 325);
         showText("Change Color", 15, 275, 322);
         MayflowerImage square = new MayflowerImage("imgs/squares.png");
@@ -41,7 +42,7 @@ public class ProfileWorld extends StatsWorld implements EventListener
             for(int c =0;c<square.getHeight();c++)
             {
 
-                square.setColorAt(r,c,StatsWorld.playerStats.getColor());
+                square.setColorAt(r,c,Runner.playerStats.getColor());
             }
         }
         img = new Actor(){
@@ -55,12 +56,23 @@ public class ProfileWorld extends StatsWorld implements EventListener
     {
         if(s.equals("back"))
         {
+            try
+            {
+                Runner.saveStats();
+            }
+            catch(IOException e)
+            {
+
+            }
             Mayflower.setWorld(world);
         }
         else if(s.equals("color"))
         {
             java.awt.Color colour = JColorChooser.showDialog(new JPanel(),"something", java.awt.Color.BLUE);
-            StatsWorld.playerStats.setColor(new Color(colour.getRed(),colour.getGreen(),colour.getBlue()));
+            if(colour != null)
+            {
+                Runner.playerStats.setColor(new Color(colour.getRed(),colour.getGreen(),colour.getBlue()));
+            }
             updateColor();
         }
     }
@@ -78,7 +90,7 @@ public class ProfileWorld extends StatsWorld implements EventListener
 
             for(int c =0;c<square.getHeight();c++)
             {
-                square.setColorAt(r,c,StatsWorld.playerStats.getColor());
+                square.setColorAt(r,c,Runner.playerStats.getColor());
             }
         }
         img.setImage(square);

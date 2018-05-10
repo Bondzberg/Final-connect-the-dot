@@ -6,18 +6,30 @@ import java.util.Scanner;
 
 public class Stats
 {
+    private String name;
     private int wins;
     private int losses;
     private int ties;
     private Color color;
 
-    public Stats(int w, int l, int t, Color c)
+    public Stats(String name, int w, int l, int t, Color c)
     {
+        this.name = name;
         wins = w;
         losses = l;
         ties = t;
         color = c;
     }
+    public Stats(int w, int l, int t, Color c)
+    {
+        //this.name = name;
+        wins = w;
+        losses = l;
+        ties = t;
+        color = c;
+    }
+
+    public String getName() {return name;}
 
     public int getWins()
     {
@@ -113,5 +125,9 @@ public class Stats
     public String toString()
     {
         return "Wins: " + getWins() + " Losses: " + getLosses() + " Ties: " + getTies() +  " Color: " + colorToString();
+    }
+    public String toFileString()
+    {
+        return getName() + " " + getWins() + " " + getLosses() + " " + getTies() +  " " + color.getRed() + " " + color.getGreen() + " " + color.getBlue();
     }
 }
