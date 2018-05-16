@@ -1,6 +1,8 @@
 import mayflower.Keyboard;
 import mayflower.Mayflower;
+import mayflower.net.Server;
 
+import javax.swing.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +16,14 @@ public class ClientRunner extends Mayflower
     @Override
     public void init()
     {
-        new ctdClient();
+
+        try{
+            new ctdClient();
+        }catch(Exception e){
+            new ctdServer(1234);
+            new ctdClient();
+        }
+
     }
 
     public static void main(String[] args)

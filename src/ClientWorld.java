@@ -1,5 +1,6 @@
 
 
+import mayflower.Color;
 import mayflower.Mayflower;
 import mayflower.net.Client;
 
@@ -9,8 +10,8 @@ public class ClientWorld extends GameWorld
     private Client client;
     private int num;
 
-    public ClientWorld(int x, int y, boolean ai,ctdClient client) {
-        super(x, y, ai);
+    public ClientWorld(int x, int y, boolean ai,ctdClient client,Color one,Color two) {
+        super(x, y, ai, one,two);
         this.client = client;
         Mayflower.setWorld(this);
     }

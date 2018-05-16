@@ -19,13 +19,15 @@ public class GameWorld extends World implements EventListener
     private boolean running;
     private Queue<Actor> actors;
     private Queue<Integer> x,y,rot;
+    private boolean ai;
 
-    public GameWorld(int x,int y,boolean ai)
+    public GameWorld(int x,int y,boolean ai,Color one,Color two)
     {
-        p1 = new player(Color.BLUE,1);
-        p2 = new player(Color.PINK,2);
+        this.ai = ai;
+        p1 = new player(one,1);
+        p2 = new player(two,2);
         if(ai)
-            p2 = new AI(Color.PINK,2,this);
+            p2 = new AI(two,2,this);
         pC = p1;
         init(x,y);
     }
@@ -231,13 +233,17 @@ public class GameWorld extends World implements EventListener
     @Override
     public void act()
     {
-
+        if(ai&&pC.equals(p2))
+        {
+            AI s = (AI)p2;
+            onEvent(s.getNextMove());
+        }
 
     }
 
     public void proccess(String s,int j)
     {
-        if(j==pC.getNum()||j==2)
+        if(j==pC.getNum())
         {
 
 
