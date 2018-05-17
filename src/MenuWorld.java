@@ -31,7 +31,7 @@ public class MenuWorld extends World implements EventListener
     {
         if(s.equals("play"))
         {
-            Mayflower.setWorld(new GameWorld(5,5,true));
+            Mayflower.setWorld(new GameWorld(2,2,true));
         }
         else if(s.equals("profile"))
         {
