@@ -1,6 +1,5 @@
 import mayflower.Color;
 import mayflower.Mayflower;
-import mayflower.Timer;
 
 import java.io.*;
 import java.util.*;
@@ -57,9 +56,7 @@ public class Runner extends Mayflower
             e.printStackTrace();
         }
         s = stats;
-        //Mayflower.setWorld(new GameWorld(5,5,false));
-
-        Mayflower.setWorld(new MenuWorld(playerStats));
+        Mayflower.setWorld(new MenuWorld());
     }
 
     public void main()
