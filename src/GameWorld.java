@@ -43,6 +43,14 @@ public class GameWorld extends World implements EventListener
 
     public void init(int x, int y)
     {
+        /*
+        for(int o = 0; o < 60; o++)
+        {
+            Winner a = new Winner();
+            a.scale(.5);
+            addObject(a, 350, 250);
+        }
+        */
         actors = new LinkedList<>();
         this.x = new LinkedList<>();
         this.y = new LinkedList<>();
