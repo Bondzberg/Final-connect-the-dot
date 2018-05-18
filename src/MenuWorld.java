@@ -29,7 +29,7 @@ public class MenuWorld extends World implements EventListener
         multiplayer.addEventListener(this);
         multiplayer.getImage().scale(0.8);
         addObject(multiplayer, 300, 500);
-        showText("multiplayer",325,500);
+        showText("multiplayer",310,550);
         showText("Profile", 345, 455);
         showText("Connect The Dots!", 75, 70, 100, Color.RED);
     }
@@ -55,7 +55,25 @@ public class MenuWorld extends World implements EventListener
 
             java.awt.Color two = JColorChooser.showDialog(new JPanel(),"Pick Player two's color", java.awt.Color.BLUE);
             Color twom = new Color(two.getRed(),two.getGreen(),two.getBlue());
-            Mayflower.setWorld(new GameWorld(5,5,Ai,Runner.playerStats.getColor(),twom));
+            Boolean size = true;
+            int xy = 5;
+            while(size)
+            {
+                String ai = Mayflower.ask("what size do you want the gameboard to be? 0 to 9");
+                try{
+                    xy = Integer.parseInt(ai);
+                    if(xy<0||xy>9)
+                    {
+
+                    }
+                    else
+                        size=false;
+                }catch (Exception e) {
+
+                }
+
+            }
+            Mayflower.setWorld(new GameWorld(xy,xy,Ai,Runner.playerStats.getColor(),twom));
 
         }
         else if(s.equals("profile"))
