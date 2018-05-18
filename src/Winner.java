@@ -58,7 +58,6 @@ public class Winner extends AnimatedActor
         }
         else if(this.getX() > 700)
         {
-
             if(direction < 0)
             {
                 direction = direction - (2*(90 - Math.abs(direction)));
@@ -69,7 +68,6 @@ public class Winner extends AnimatedActor
                 direction = direction + (2*(90 - Math.abs(direction)));
                 setRotation(direction);
             }
-
         }
         else if(this.getY() <= -20 || (this.getY() >= 500))
         {
