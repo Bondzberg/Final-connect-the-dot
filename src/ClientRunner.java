@@ -17,12 +17,12 @@ public class ClientRunner extends Mayflower
     public void init()
     {
 
-        try{
+        /*try{
             new ctdClient();
         }catch(Exception e){
             new ctdServer(1234);
             new ctdClient();
-        }
+        }*/
 
     }
 

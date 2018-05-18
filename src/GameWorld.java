@@ -3,6 +3,7 @@ import mayflower.Color;
 import mayflower.Mayflower;
 import mayflower.World;
 import mayflower.event.EventListener;
+import mayflower.ui.Button;
 
 import java.util.*;
 
@@ -20,6 +21,7 @@ public class GameWorld extends World implements EventListener
     private Queue<Actor> actors;
     private Queue<Integer> x,y,rot;
     private boolean ai;
+    private Button back;
 
     public GameWorld(int x,int y,boolean ai,Color one,Color two)
     {
@@ -42,6 +44,11 @@ public class GameWorld extends World implements EventListener
 
     public void init(int x, int y)
     {
+        back = new Button("imgs/Button.png","back");
+        addObject(back,0,0);
+        back.scale(.5);
+
+        back.addEventListener(this);
         actors = new LinkedList<>();
         this.x = new LinkedList<>();
         this.y = new LinkedList<>();
@@ -159,6 +166,11 @@ public class GameWorld extends World implements EventListener
     @Override
     public void onEvent(String s)
     {
+        if(s.equals("back"))
+        {
+            Mayflower.setWorld(new MenuWorld(Runner.playerStats));
+            return;
+        }
         System.out.println(s);
         List<square> i = lts.get(lines.get(s));
         for(square l:i)
@@ -188,10 +200,14 @@ public class GameWorld extends World implements EventListener
             if(p1.getScore()>p2.getScore()) {
                 winner = "player " + 1;
                 wins = p1.getColor();
+                Runner.playerStats.setWins(Runner.playerStats.getWins()+1);
+                Runner.saveStats();
             }
             else if(p2.getScore()>p1.getScore()) {
                 winner = "player " + 2;
                 wins = p2.getColor();
+                Runner.playerStats.setLosses(Runner.playerStats.getLosses()+1);
+                Runner.saveStats();
             }
             showText(winner+" wins",250,500,wins);
 
@@ -233,11 +249,12 @@ public class GameWorld extends World implements EventListener
     @Override
     public void act()
     {
-        if(ai&&pC.equals(p2))
+        if(ai&&pC.equals(p2)&&!isDone())
         {
             AI s = (AI)p2;
             onEvent(s.getNextMove());
         }
+        showText("Menu",64,64);
 
     }
 
@@ -245,8 +262,6 @@ public class GameWorld extends World implements EventListener
     {
         if(j==pC.getNum())
         {
-
-
                 System.out.println(s);
                 List<square> i = lts.get(lines.get(s));
                 for(square l:i)
@@ -271,10 +286,14 @@ public class GameWorld extends World implements EventListener
                     if(p1.getScore()>p2.getScore()) {
                         winner = "player " + 1;
                         wins = p1.getColor();
+                        Runner.playerStats.setWins(Runner.playerStats.getWins()+1);
+                        Runner.saveStats();
                     }
                     else if(p2.getScore()>p1.getScore()) {
                         winner = "player " + 2;
                         wins = p2.getColor();
+                        Runner.playerStats.setLosses(Runner.playerStats.getLosses()+1);
+                        Runner.saveStats();
                     }
                     showText(winner+" wins",250,500,wins);
 

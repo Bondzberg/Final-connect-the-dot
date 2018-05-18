@@ -16,11 +16,10 @@ public class ctdClient extends Client
     private Color color2;
 
 
-    public ctdClient()
+    public ctdClient(Color col)
     {
         this.world = world;
-        java.awt.Color awt = JColorChooser.showDialog(new JPanel(),"something", java.awt.Color.BLUE);
-        this.color = new Color(awt.getRed(),awt.getGreen(),awt.getBlue());
+        this.color = col;
         try {
             this.connect(Mayflower.ask("enter the ip of the server"), 1234);
         }catch(Exception e)
@@ -71,6 +70,18 @@ public class ctdClient extends Client
             world.proccess(ss,value);
         }
 
+    }
+
+    public ClientWorld getWorld() {
+        return world;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public Color getColor2() {
+        return color2;
     }
 
     @Override

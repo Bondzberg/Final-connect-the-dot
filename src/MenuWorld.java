@@ -52,11 +52,11 @@ public class MenuWorld extends World implements EventListener
                     Ai = true;
                 }
             }
-            java.awt.Color one = JColorChooser.showDialog(new JPanel(),"something", java.awt.Color.BLUE);
-            Color onem = new Color(one.getRed(),one.getGreen(),one.getBlue());
-            java.awt.Color two = JColorChooser.showDialog(new JPanel(),"something", java.awt.Color.BLUE);
+
+            java.awt.Color two = JColorChooser.showDialog(new JPanel(),"Pick Player two's color", java.awt.Color.BLUE);
             Color twom = new Color(two.getRed(),two.getGreen(),two.getBlue());
-            Mayflower.setWorld(new GameWorld(5,5,Ai,onem,twom));
+            Mayflower.setWorld(new GameWorld(5,5,Ai,Runner.playerStats.getColor(),twom));
+
         }
         else if(s.equals("profile"))
         {
@@ -64,7 +64,7 @@ public class MenuWorld extends World implements EventListener
         }
         else if(s.equals("multi"))
         {
-            new ctdClient();
+            new ctdClient(Runner.playerStats.getColor());
         }
     }
     public void act()
