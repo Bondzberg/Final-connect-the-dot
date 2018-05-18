@@ -64,16 +64,20 @@ public class Runner extends Mayflower
 
     }
 
-    public static void saveStats() throws IOException
+    public static void saveStats()
     {
-        Scanner s = new Scanner("stats.txt");
-        FileWriter fw = new FileWriter("stats.txt", false);
-        BufferedWriter bw = new BufferedWriter(fw);
-        PrintWriter a = new PrintWriter(bw, true);
-        for(int i = 0; i < Runner.s.size(); i++)
+        try {
+            Scanner s = new Scanner("stats.txt");
+            FileWriter fw = new FileWriter("stats.txt", false);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter a = new PrintWriter(bw, true);
+            for (int i = 0; i < Runner.s.size(); i++) {
+                a.println(Runner.s.get(i).toFileString());
+            }
+            a.close();
+        }catch(Exception e)
         {
-            a.println(Runner.s.get(i).toFileString());
+            e.printStackTrace();
         }
-        a.close();
     }
 }

@@ -7,14 +7,9 @@ public class AI extends player
 {
 
     private GameWorld world;
-    private Thread thread;
-    private Boolean working;
     public AI(Color color,int p,GameWorld world) {
         super(color,p);
         this.world = world;
-        thread = new Thread1();
-        thread.start();
-        working = false;
     }
 
     public String getNextMove()
@@ -48,25 +43,5 @@ public class AI extends player
         String ret = min.get((int)(Math.random()*min.size()));
         return ret ;
     }
-
-
-        public class Thread1 extends Thread {
-            public void run() {
-                while (world.isRunning()) {
-                    if (!working && world.getpC().getNum() == getNum()) {
-                        working = true;
-                        world.proccess(getNextMove(),2);
-                        working = false;
-                        yield();
-                    }
-                    try {
-                        sleep(64);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-            }
-        }
 }
 

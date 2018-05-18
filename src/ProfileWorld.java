@@ -53,14 +53,10 @@ public class ProfileWorld extends World implements EventListener
     {
         if(s.equals("back"))
         {
-            try
-            {
-                Runner.saveStats();
-            }
-            catch(IOException e)
-            {
 
-            }
+                Runner.saveStats();
+
+
             Mayflower.setWorld(world);
         }
         else if(s.equals("color"))

@@ -21,14 +21,22 @@ public class GameWorld extends World implements EventListener
     private boolean running;
     private Queue<Actor> actors;
     private Queue<Integer> x,y,rot;
+
+    private boolean ai;
+    private Button back;
+
     private Button replay;
 
-    public GameWorld(int x,int y,boolean ai)
+
+    public GameWorld(int x,int y,boolean ai,Color one,Color two)
     {
-        p1 = new player(Runner.playerStats.getColor(),1);
-        p2 = new player(Color.PINK,2);
+
+        this.ai = ai;
+        p1 = new player(one,1);
+        p2 = new player(two,2);
+
         if(ai)
-            p2 = new AI(Color.PINK,2,this);
+            p2 = new AI(two,2,this);
         pC = p1;
         init(x,y);
     }
@@ -43,14 +51,6 @@ public class GameWorld extends World implements EventListener
 
     public void init(int x, int y)
     {
-        /*
-        for(int o = 0; o < 60; o++)
-        {
-            Winner a = new Winner();
-            a.scale(.5);
-            addObject(a, 350, 250);
-        }
-        */
         actors = new LinkedList<>();
         this.x = new LinkedList<>();
         this.y = new LinkedList<>();
@@ -177,7 +177,6 @@ public class GameWorld extends World implements EventListener
         }
         else
         {
-
             System.out.println(s);
             List<square> i = lts.get(lines.get(s));
             for(square l:i)
@@ -227,13 +226,18 @@ public class GameWorld extends World implements EventListener
     @Override
     public void act()
     {
+        if(ai&&pC.equals(p2)&&!isDone())
+        {
+            AI s = (AI)p2;
+            onEvent(s.getNextMove());
+        }
 
 
     }
 
     public void proccess(String s,int j)
     {
-        if(j==pC.getNum()||j==2)
+        if(j==pC.getNum())
         {
                 System.out.println(s);
                 List<square> i = lts.get(lines.get(s));
@@ -250,7 +254,10 @@ public class GameWorld extends World implements EventListener
                 img.setImage(pC.getImageL());
                 addObject(img,lines.get(s).getX(),lines.get(s).getY());
                 img.setRotation(lines.get(s).getRotation());
+
+
                 gameEnd();
+
                 if(!scored) {
                     if (pC.equals(p1)) {
                         pC = p2;
@@ -321,14 +328,10 @@ public class GameWorld extends World implements EventListener
                 Runner.playerStats.incLosses();
             }
             //addObject(new Winner(), 25, 25);
-            try
-            {
-                Runner.saveStats();
-            }
-            catch(IOException e)
-            {
 
-            }
+                Runner.saveStats();
+
+
             addObject(replay, 450, 450);
             showText("Menu", 505, 505);
             running=false;
