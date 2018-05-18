@@ -231,7 +231,7 @@ public class GameWorld extends World implements EventListener
             AI s = (AI)p2;
             onEvent(s.getNextMove());
         }
-        showText("Menu",64,64);
+
 
     }
 

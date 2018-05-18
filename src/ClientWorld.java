@@ -29,9 +29,9 @@ public class ClientWorld extends GameWorld
     {
         if(s.equals("back"))
         {
-            Mayflower.setWorld(new MenuWorld(Runner.playerStats));
+            //Mayflower.setWorld(new MenuWorld(Runner.playerStats));
             client.disconnect();
-            Mayflower.setWorld(new MenuWorld(Runner.playerStats));
+            Mayflower.setWorld(new MenuWorld());
             return;
         }
         client.send(s);
