@@ -20,7 +20,7 @@ public class ClientWorld extends GameWorld
     public void act() {
         super.act();
         Color color = client.getColor();
-        if(client.getWorld().getNum()==2)
+        if(client.getWorld().getNum()%2==0)
             color = client.getColor2();
         showText("you are Player "+client.getWorld().getNum(),500,400,color);
     }
