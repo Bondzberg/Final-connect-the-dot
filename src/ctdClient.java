@@ -6,6 +6,7 @@ import mayflower.World;
 import mayflower.net.Client;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class ctdClient extends Client
 {
@@ -24,6 +25,7 @@ public class ctdClient extends Client
             this.connect(Mayflower.ask("enter the ip of the server"), 1234);
         }catch(Exception e)
         {
+            JOptionPane.showMessageDialog(new Frame(), "No server detected at the IP address, creating a new server", "No server detected", JOptionPane.ERROR_MESSAGE);
             new ctdServer(1234);
             this.connect("localhost",1234);
         }
