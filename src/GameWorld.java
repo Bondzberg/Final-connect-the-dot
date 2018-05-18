@@ -25,7 +25,7 @@ public class GameWorld extends World implements EventListener
 
     public GameWorld(int x,int y,boolean ai)
     {
-        p1 = new player(Color.BLUE,1);
+        p1 = new player(Runner.playerStats.getColor(),1);
         p2 = new player(Color.PINK,2);
         if(ai)
             p2 = new AI(Color.PINK,2,this);
