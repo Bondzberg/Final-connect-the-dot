@@ -3,7 +3,9 @@ import mayflower.Color;
 import mayflower.Mayflower;
 import mayflower.World;
 import mayflower.event.EventListener;
+import mayflower.ui.Button;
 
+import java.io.IOException;
 import java.util.*;
 
 public class GameWorld extends World implements EventListener
@@ -19,6 +21,7 @@ public class GameWorld extends World implements EventListener
     private boolean running;
     private Queue<Actor> actors;
     private Queue<Integer> x,y,rot;
+    private Button replay;
 
     public GameWorld(int x,int y,boolean ai)
     {
@@ -48,6 +51,9 @@ public class GameWorld extends World implements EventListener
         squares = new square[x][y];
         lts = new HashMap();
         running = true;
+        replay = new Button("imgs/Button.png", "end");
+        replay.addEventListener(this);
+        replay.getImage().scale(0.8);
 
         scored = false;
         showText("Current player: 1",250,20,p1.getColor());
@@ -157,64 +163,46 @@ public class GameWorld extends World implements EventListener
     @Override
     public void onEvent(String s)
     {
-        System.out.println(s);
-        List<square> i = lts.get(lines.get(s));
-        for(square l:i)
-            l.incrementVlaue();
-        lines.get(s).clearEventListeners();
-
-        Actor img = new Actor() {
-            @Override
-            public void act() {
-
-            }
-        };
-        img.setImage(pC.getImageL());
-        addObject(img,lines.get(s).getX(),lines.get(s).getY());
-        img.setRotation(lines.get(s).getRotation());
-        if(isDone())
+        if(s.equals("end"))
         {
-            for(int o = 0; o < 60; o++)
-            {
-                Winner a = new Winner();
-                a.scale(.5);
-                addObject(a, 350, 250);
-            }
+            Mayflower.setWorld(new MenuWorld());
+        }
+        else
+        {
 
-            String winner = "no one" ;
-            Color wins = Color.BLACK;
-            if(p1.getScore()>p2.getScore()) {
-                winner = "player " + 1;
-                wins = p1.getColor();
-            }
-            else if(p2.getScore()>p1.getScore()) {
-                winner = "player " + 2;
-                wins = p2.getColor();
-            }
-            showText(winner+" wins",250,500,wins);
+            System.out.println(s);
+            List<square> i = lts.get(lines.get(s));
+            for(square l:i)
+                l.incrementVlaue();
+            lines.get(s).clearEventListeners();
 
-            //addObject(new Winner(), 25, 25);
-            running=false;
+            Actor img = new Actor() {
+                @Override
+                public void act() {
 
-            return;
+                }
+            };
+            img.setImage(pC.getImageL());
+            addObject(img,lines.get(s).getX(),lines.get(s).getY());
+            img.setRotation(lines.get(s).getRotation());
+            gameEnd();
+            if(!scored) {
+                if (pC.equals(p1)) {
+                    pC = p2;
+                    getTexts().clear();
+                    showText("Current player: 2",250,20,p2.getColor());
+                }
+                else {
+                    pC = p1;
+                    getTexts().clear();
+                    showText("Current player: 1",250,20,p1.getColor());
+                }
+            }
+            scored = false;
+            lines.remove(s);
+
 
         }
-        if(!scored) {
-            if (pC.equals(p1)) {
-                pC = p2;
-                getTexts().clear();
-                showText("Current player: 2",250,20,p2.getColor());
-            }
-            else {
-                pC = p1;
-                getTexts().clear();
-                showText("Current player: 1",250,20,p1.getColor());
-            }
-        }
-        scored = false;
-        lines.remove(s);
-
-
     }
 
     public boolean isDone()
@@ -239,8 +227,6 @@ public class GameWorld extends World implements EventListener
     {
         if(j==pC.getNum()||j==2)
         {
-
-
                 System.out.println(s);
                 List<square> i = lts.get(lines.get(s));
                 for(square l:i)
@@ -256,27 +242,7 @@ public class GameWorld extends World implements EventListener
                 img.setImage(pC.getImageL());
                 addObject(img,lines.get(s).getX(),lines.get(s).getY());
                 img.setRotation(lines.get(s).getRotation());
-
-                if(isDone())
-                {
-                    running=false;
-                    String winner = "no one" ;
-                    Color wins = Color.BLACK;
-                    if(p1.getScore()>p2.getScore()) {
-                        winner = "player " + 1;
-                        wins = p1.getColor();
-                    }
-                    else if(p2.getScore()>p1.getScore()) {
-                        winner = "player " + 2;
-                        wins = p2.getColor();
-                    }
-                    showText(winner+" wins",250,500,wins);
-
-                    //addObject(new Winner(), 25, 25);
-
-                    return;
-
-                }
+                gameEnd();
                 if(!scored) {
                     if (pC.equals(p1)) {
                         pC = p2;
@@ -303,6 +269,63 @@ public class GameWorld extends World implements EventListener
 
     public void setScored(boolean scored) {
         this.scored = scored;
+    }
+
+    public void gameEnd()
+    {
+        player win;
+        if(isDone())
+        {
+            for(int o = 0; o < 60; o++)
+            {
+                Winner a = new Winner();
+                a.scale(.5);
+                addObject(a, 350, 250);
+            }
+
+            String winner = "no one" ;
+            Color wins = Color.BLACK;
+            if(p1.getScore()>p2.getScore()) {
+                winner = "player " + 1;
+                wins = p1.getColor();
+                win = p1;
+            }
+            else if(p2.getScore()>p1.getScore()) {
+                winner = "player " + 2;
+                wins = p2.getColor();
+                win = p2;
+            }
+            else
+            {
+                win = null;
+            }
+            showText(winner+" wins",250,500,wins);
+            if(win == null)
+            {
+                Runner.playerStats.incTies();
+            }
+            else if(win.equals(p1))
+            {
+                Runner.playerStats.incWins();
+            }
+            else
+            {
+                Runner.playerStats.incLosses();
+            }
+            //addObject(new Winner(), 25, 25);
+            try
+            {
+                Runner.saveStats();
+            }
+            catch(IOException e)
+            {
+
+            }
+            addObject(replay, 450, 450);
+            showText("Menu", 505, 505);
+            running=false;
+            return;
+        }
     }
 
     public player getpC() {

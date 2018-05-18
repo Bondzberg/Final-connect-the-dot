@@ -36,21 +36,21 @@ public class Stats
         return wins;
     }
 
-    public void setWins(int w) {wins = w;}
+    public void incWins() {wins++;}
 
     public int getLosses()
     {
         return losses;
     }
 
-    public void setLosses(int l){losses = l;}
+    public void incLosses(){losses++;}
 
     public int getTies()
     {
         return ties;
     }
 
-    public void setTies(int t){ties=t;}
+    public void incTies(){ties++;}
 
     public Color getColor()
     {
