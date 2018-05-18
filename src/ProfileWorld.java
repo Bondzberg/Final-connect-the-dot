@@ -2,12 +2,9 @@ import mayflower.*;
 import mayflower.Color;
 import mayflower.event.EventListener;
 import mayflower.ui.Button;
-import org.w3c.dom.css.Rect;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
-import java.util.Map;
 
 public class ProfileWorld extends World implements EventListener
 {

@@ -1,6 +1,5 @@
 import mayflower.Color;
 import mayflower.Mayflower;
-import mayflower.Timer;
 
 import java.io.*;
 import java.util.*;
@@ -48,7 +47,8 @@ public class Runner extends Mayflower
             }
             if(playerStats == null)
             {
-                playerStats = new Stats("guest", 0, 0, 0, new Color(255, 0,0));
+                playerStats = new Stats(name, 0, 0, 0, new Color(255, 0,0));
+                stats.add(playerStats);
             }
         }
         catch(FileNotFoundException e)
@@ -56,9 +56,7 @@ public class Runner extends Mayflower
             e.printStackTrace();
         }
         s = stats;
-        //Mayflower.setWorld(new GameWorld(5,5,false));
-
-        Mayflower.setWorld(new MenuWorld(playerStats));
+        Mayflower.setWorld(new MenuWorld());
     }
 
     public void main()

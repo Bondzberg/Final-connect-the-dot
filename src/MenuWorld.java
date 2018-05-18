@@ -1,9 +1,9 @@
 import mayflower.Color;
 import mayflower.Mayflower;
-import mayflower.MayflowerImage;
 import mayflower.World;
 import mayflower.event.EventListener;
 import mayflower.ui.Button;
+
 
 import javax.swing.*;
 import java.util.Map;
@@ -13,7 +13,8 @@ public class MenuWorld extends World implements EventListener
     private Button play, profile,multiplayer;
     private player p1,p2;
 
-    public MenuWorld(Stats s)
+
+    public MenuWorld()
     {
         play = new Button("imgs/Button.png", "play");
         play.addEventListener(this);
